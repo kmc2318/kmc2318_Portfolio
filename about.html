@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | Kaworu Suzuki Portfolio</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    :root { --header-h: 72px; }
+
+    .about-page {
+      padding-top: var(--header-h);
+    }
+
+    .about-hero {
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      padding: 140px var(--container-pad) 80px;
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+      min-height: calc(100vh - var(--header-h));
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .about-hero h1 {
+      font-family: var(--font-jp);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 400;
+      margin-bottom: 40px;
+      line-height: 1.5;
+      text-align: left;
+    }
+
+    .about-hero p {
+      font-size: 1rem;
+      color: var(--text);
+      max-width: 700px;
+      margin: 0;
+      line-height: 1.8;
+      text-align: left;
+    }
+
+    /* Thread-like background */
+    .about-hero::before {
+      content: "";
+      position: absolute;
+      inset: -20% -10%;
+      background:
+        radial-gradient(1000px 300px at 15% 15%, rgba(0,0,0,0.05), transparent 65%),
+        radial-gradient(900px 260px at 80% 25%, rgba(0,0,0,0.04), transparent 65%),
+        repeating-linear-gradient(
+          120deg,
+          rgba(0,0,0,0.08) 0px,
+          rgba(0,0,0,0.08) 1px,
+          transparent 1px,
+          transparent 64px
+        ),
+        repeating-linear-gradient(
+          -120deg,
+          rgba(0,0,0,0.045) 0px,
+          rgba(0,0,0,0.045) 1px,
+          transparent 1px,
+          transparent 92px
+        );
+      opacity: 0.45;
+      pointer-events: none;
+      animation: threadFlow 18s linear infinite;
+    }
+
+    .about-hero > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    @keyframes threadFlow {
+      0%   { transform: translate3d(0, 0, 0) rotate(0.3deg); }
+      50%  { transform: translate3d(-2.5%, -1.5%, 0) rotate(-0.3deg); }
+      100% { transform: translate3d(0, 0, 0) rotate(0.3deg); }
+    }
+
+    .about-section {
+      padding: var(--container-pad);
+      max-width: var(--container-max);
+      margin: 0 auto;
+    }
+
+    .about-intro {
+      font-size: 1rem;
+      color: var(--sub);
+      margin-bottom: 80px;
+      line-height: 1.8;
+    }
+
+    .section-label {
+      font-family: var(--font-en);
+      font-size: 2rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--sub);
+      margin-bottom: 60px;
+      text-align: center;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 100px;
+      align-items: center;
+    }
+
+    .about-grid-img {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .about-grid-img img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      position: absolute;
+      inset: 0;
+      transition: opacity 0.4s ease;
+      opacity: 0;
+    }
+
+    .about-grid-img img:first-child {
+      opacity: 1;
+    }
+
+    .about-grid-img:hover img {
+      opacity: 0;
+    }
+
+    .about-grid-img:hover img:nth-child(2) {
+      opacity: 1;
+    }
+
+    .about-grid-text h2 {
+      font-family: var(--font-jp);
+      font-size: 1.8rem;
+      font-weight: 400;
+      margin-bottom: 20px;
+    }
+
+    .about-grid-text p {
+      font-size: 0.95rem;
+      color: var(--sub);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .values-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      margin-top: 80px;
+    }
+
+    .value-card {
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 40px 30px;
+      text-align: center;
+      transition: all 0.5s var(--ease);
+      cursor: pointer;
+      overflow: hidden;
+      height: fit-content;
+    }
+
+    .value-card:hover {
+      border-color: var(--text);
+      transform: translateY(-4px);
+    }
+
+    .value-card.is-active {
+      text-align: left;
+      border-color: var(--text);
+      background: white;
+      cursor: default;
+    }
+
+    .value-detail {
+      display: none;
+      margin-top: 25px;
+      padding-top: 25px;
+      border-top: 1px solid var(--border);
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    .value-card.is-active .value-detail {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .value-number {
+      font-family: var(--font-en);
+      font-size: 2.5rem;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      color: var(--sub);
+      margin-bottom: 15px;
+    }
+
+    .value-card h3 {
+      font-family: var(--font-jp);
+      font-size: 1.4rem;
+      font-weight: 400;
+      margin-bottom: 15px;
+      color: var(--text);
+    }
+
+    .value-card p {
+      font-size: 0.9rem;
+      color: var(--sub);
+      line-height: 1.7;
+      cursor: pointer;
+    }
+
+    @media (max-width: 968px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .values-list {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .tools-section {
+      margin-top: 100px;
+      text-align: left;
+    }
+
+    .tools-section h3 {
+      font-family: var(--font-jp);
+      font-size: 1.4rem;
+      font-weight: 400;
+      margin-bottom: 20px;
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+      gap: 40px;
+      align-items: start;
+    }
+
+    .tools-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px 22px;
+    }
+
+    .tool-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-en);
+      letter-spacing: 0.04em;
+      color: var(--text);
+    }
+
+    .tool-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      border: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: var(--sub);
+      flex: 0 0 36px;
+    }
+
+    .tools-lead {
+      margin-top: 45px;
+      color: var(--sub);
+      line-height: 1.8;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 968px) {
+      .tools-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+    }
+
+    .contact-section {
+      margin: 80px 0 120px;
+    }
+
+    .contact-title {
+      font-family: var(--font-jp);
+      font-size: 1.8rem;
+      font-weight: 400;
+      margin-bottom: 20px;
+    }
+
+    .contact-lead {
+      color: var(--sub);
+      line-height: 1.8;
+      font-size: 0.95rem;
+      margin-bottom: 30px;
+    }
+
+    .contact-email {
+      font-family: var(--font-en);
+      font-size: 1.1rem;
+      border-bottom: 1px solid var(--text);
+      display: inline-block;
+    }
+  </style>
+</head>
+
+<body class="about-page">
+
+  <!-- 共通ヘッダー -->
+  <header id="main-header" class="header-scrolled">
+    <div class="logo">
+      <a href="index.html">Kaworu Suzuki Portfolio</a>
+    </div>
+    <nav id="main-nav">
+      <a href="index.html" id="nav-home">Home</a>
+      <a href="index.html#projects" id="nav-project">Project</a>
+      <a href="index.html#about-values" id="nav-about" class="current">About</a>
+      <a href="index.html#contact" id="nav-contact">Contact</a>
+      <span class="nav-indicator" aria-hidden="true"></span>
+    </nav>
+  </header>
+
+  <!-- ブレッドクラムナビゲーション -->
+  <div class="page-subnav">
+    <span class="breadcrumb">
+      <a href="index.html">トップ</a>
+      <span class="sep">›</span>
+      <span class="current">About</span>
+    </span>
+  </div>
+
+  <!-- ヒーロー部分 -->
+  <section class="about-hero">
+    <h1>
+      関係性を<br>
+      紐解き、結ぶ。
+    </h1>
+    <p>
+      モノをつくる。体験をつくる。それはただ表面的な形を整えることではなく、<br>
+      人と人、人と場の「関係性」をデザインすることだと、私は考えています。<br>
+      現場に行き、話を聴き、想いを受け取る。そんなプロセスをしっかりと踏むことで、本当の関係性が見えてくる。<br>
+      それからやっと、新たな関係性をデザインすることに重きを置いてきました。
+    </p>
+  </section>
+
+  <!-- コンテンツ -->
+  <section class="about-section">
+
+    <!-- プロフィール -->
+    <div style="margin-bottom: 100px;">
+      <p class="section-label" style="text-align:center;">Profile</p>
+      <div style="display: grid; grid-template-columns: 200px 1fr; gap: 40px;">
+        <div>
+          <p style="color: var(--sub); font-size: 1.2rem; margin-bottom: 20px;">
+            <strong>名前</strong><br>
+            鈴木カヲル
+          </p>
+          <p style="color: var(--sub); font-size: 1.2rem; margin-bottom: 20px;">
+            <strong>出身</strong><br>
+            山形県酒田市
+          </p>
+        </div>
+        <div>
+          <p style="color: var(--text); font-size: 0.95rem; line-height: 1.8; text-align: left;">
+            2007年山形県酒田市生まれ。<br>
+            犬が大好きで、毎日のようにダンボールで愛犬の家を工作し没頭。<br><br>
+            中学校では生徒会長を務め、モノや体験で関係性をつくれることに気づき、モノづくり/体験設計に興味を持ち始める。<br>
+            2023年4月に神山まるごと高専へ入学し、現在も徳島県神山町で寮生活を送っている。<br><br>
+            イベント企画から始まり、広報、展示体制の構築、プロジェクトマネージャーなど、<br>
+            多角的なアプローチで関係性のデザインに取り組んできました。<br><br>
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 01. 紹介セクション -->
+    <div class="about-grid">
+      <div class="about-grid-img">
+        <img src="assets/images/about-1.jpeg" alt="About Photo 1">
+        <img src="assets/images/about2.jpeg" alt="About Photo 2">
+        <img src="assets/images/about3.jpeg" alt="About Photo 3">
+        <img src="assets/images/about4.jpeg" alt="About Photo 4">
+        <img src="assets/images/about5.jpeg" alt="About Photo 5">
+
+      </div>
+      <div class="about-grid-text">
+        <h2>モノをつくること、<br>関係性をデザインすること。</h2>
+        <p>
+          私は今まで、目の前に届ける相手がいるモノづくりに没頭してきました。
+        </p>
+        <p>
+          「あのこが楽しそうに笑ってくれたらいいな」<br>
+          「これをつくったら家族が喜びそうだな」<br>
+        </p>
+        <p>
+          相手を思い浮かべながらつくる時間が、私にとっての原動力でした。<br>
+          モノは形だけでなく、人と人をつなぎ、<br>
+          その先の関係性までもつくるきっかけになるものだと思っています。<br><br>
+          だから私は、<br>
+          使う人の気持ちに寄り添うモノをつくること。<br>
+          誰かの背中を押せるきっかけになるようなデザインをすることを大切にしています。
+        </p>
+      </div>
+    </div>
+
+    <!-- 02. 大切にしていることセクション -->
+    <p class="section-label">Values</p>
+
+    <div class="values-list">
+      <div class="value-card" data-value="empathy">
+        <div class="value-number">01</div>
+        <h3>共感</h3>
+        <p>相手の立場に立って考え、想いを受け取ることからすべてが始まる。デザインはまず、人を知ることからだと考えています。</p>
+      </div>
+      <div class="value-card" data-value="action">
+        <div class="value-number">02</div>
+        <h3>実行</h3>
+        <p>考えるだけで終わらせず、手を動かして形にする。小さくても、現実を一歩動かすことを大切にしています。</p>
+      </div>
+      <div class="value-card" data-value="connect">
+        <div class="value-number">03</div>
+        <h3>結ぶ</h3>
+        <p>人と人、想いと想いをつなぎ、新しい関係性を生み出す。その"間"をデザインすることが私のやりたいことです。</p>
+      </div>
+    </div>
+
+    <div class="tools-section">
+      <p class="section-label">Tools</p>
+      <div class="tools-grid">
+        <div class="tools-list">
+          <div class="tool-item"><span class="tool-icon">Fi</span>Figma</div>
+          <div class="tool-item"><span class="tool-icon">Ai</span>Illustrator</div>
+          <div class="tool-item"><span class="tool-icon">Ps</span>Photoshop</div>
+          <div class="tool-item"><span class="tool-icon">Ae</span>After Effects</div>
+          <div class="tool-item"><span class="tool-icon">Pr</span>Premiere Pro</div>
+          <div class="tool-item"><span class="tool-icon">VS</span>VSCode</div>
+          <div class="tool-item"><span class="tool-icon">No</span>Notion</div>
+          <div class="tool-item"><span class="tool-icon">Sl</span>Slack</div>
+        </div>
+        <p class="tools-lead">
+          日常的に使用しているツールです。プロフェッショナルの方々ほど使いこなせているわけではありませんが、
+          制作や課題の中で基本的な機能は一通り扱い、アイデアを形にするためや仲間と一緒に進めていくためのツールとして活用しています。
+        </p>
+      </div>
+    </div>
+
+  </section>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+
+  <script>
+    // 画像スライドショー
+    document.addEventListener('DOMContentLoaded', () => {
+      const imageContainer = document.querySelector('.about-grid-img');
+      if (imageContainer) {
+        const images = imageContainer.querySelectorAll('img');
+        let currentIndex = 0;
+
+        imageContainer.addEventListener('mouseenter', () => {
+          images[currentIndex].style.opacity = '0';
+          currentIndex = (currentIndex + 1) % images.length;
+          images[currentIndex].style.opacity = '1';
+        });
+      }
+
+      // VALUES: クリックで開閉
+      const valueCards = document.querySelectorAll('.value-card');
+
+      const valueData = {
+        empathy: `
+          <div class="value-detail">
+            <p>これまで私は、マネジメントやディレクション、連携の役割を担うことがほとんどでした。異なる立場とバックグラウンドを持つ者同士で100%理解し合うことは難しいですが、想像力を持ち、偏見を持たずに話をよく聴く。そして相手の気持ちや感情に共感すること。それが、私にできることだと考えています。</p>
+            <p style="margin-top: 20px;">
+          </div>`,
+        action: `
+          <div class="value-detail">
+            <p>考えることは誰でもできるけれど、形にすることはそれより難しい。これまで企画から展示制作までも携わらせてもらってきましたが、自分の考えやつくりたいモノがあるときにまずはつくってみること、やってみることの重要性を学びました。それからは、必要な準備はした上で、試してみることを大切にしています。</p>
+          </div>`,
+        connect: `
+          <div class="value-detail">
+            <p>町内で「伝える」ための仕事をする中で、同じ内容でも、伝え方ひとつで相手の受け取り方や行動が変わり、人と人との関係性まで左右することに気づきました。人と人のあいだにある距離や不安をやわらかくほどき、新しい関係性を結んでいくこともできる。また、何かをつなげるだけでなく、自分自身のチャンスや機会も自己の成長に結びつけていくことを大切にしています。</p>
+          </div>`
+      };
+
+      valueCards.forEach(card => {
+        card.addEventListener('click', () => {
+          const isAlreadyActive = card.classList.contains('is-active');
+
+          if (!isAlreadyActive) {
+            card.classList.add('is-active');
+            const key = card.dataset.value;
+            card.insertAdjacentHTML('beforeend', valueData[key]);
+          } else {
+            card.classList.remove('is-active');
+            const detail = card.querySelector('.value-detail');
+            if (detail) detail.remove();
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
