@@ -60,6 +60,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const KEEP_MS = 2200;
   const FADE_MS = 900;
+  const deepLinkTarget = location.hash
+    ? document.getElementById(decodeURIComponent(location.hash.slice(1)))
+    : null;
+
+  if (deepLinkTarget) {
+    sessionStorage.setItem(KEY, "1");
+    intro.style.display = "none";
+    intro.classList.remove("is-show", "is-hide");
+    return;
+  }
 
   const runIntro = () => {
     if (triggered) return;
@@ -147,7 +157,22 @@ document.addEventListener('DOMContentLoaded', () => {
   const intro = document.getElementById("intro");
   if (!intro) return;
 
-  // もしURLが #projects みたいになってたら、初回表示で勝手に飛ぶので消す
+  const deepLinkTarget = location.hash
+    ? document.getElementById(decodeURIComponent(location.hash.slice(1)))
+    : null;
+
+  if (deepLinkTarget) {
+    intro.style.display = "none";
+    intro.classList.remove("is-show", "is-hide");
+    document.documentElement.classList.remove("intro-lock");
+    document.body.classList.remove("intro-lock");
+    requestAnimationFrame(() => {
+      deepLinkTarget.scrollIntoView({ block: "start" });
+    });
+    return;
+  }
+
+  // 未知のハッシュだけ、初回表示で勝手に飛ばないよう消す
   if (location.hash) {
     history.replaceState(null, "", location.pathname + location.search);
   }
@@ -232,13 +257,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // --- 3. トップページ専用：プロジェクトリストの描画 ---
-    const projectListContainer = document.getElementById('projects-list');
-    // index.htmlのときだけ実行
+    const projectListContainer = document.getElementById("projects-list");
+
     if (projectListContainer) {
-        const data = (typeof projects !== 'undefined') ? projects
-                    : (window.PROJECTS || []); // どっちでも動く保険
+      (async () => {
+        const data = typeof window.getProjects === "function"
+          ? await window.getProjects()
+          : (Array.isArray(window.projects) ? window.projects : []);
+
         renderTopProjects(projectListContainer, data);
+        scrollToCurrentHashTarget();
+      })();
     }
+
+function scrollToCurrentHashTarget() {
+  if (!window.location.hash) return;
+
+  const target = document.getElementById(decodeURIComponent(window.location.hash.slice(1)));
+  if (!target) return;
+
+  requestAnimationFrame(() => {
+    target.scrollIntoView({ block: "start" });
+  });
+}
+
+window.addEventListener("load", scrollToCurrentHashTarget);
 
 /**
  * index.html用の描画関数
@@ -412,6 +455,7 @@ if ("scrollRestoration" in history) {
 })();
 
 // ===== Contact form (Formspree AJAX) =====
+// ===== Contact form (Formspree AJAX) =====
 (() => {
   const form = document.getElementById("contact-form");
   if (!form) return;
@@ -436,7 +480,9 @@ if ("scrollRestoration" in history) {
       const response = await fetch(form.action, {
         method: "POST",
         body: new FormData(form),
-        headers: { Accept: "application/json" },
+        headers: {
+          Accept: "application/json",
+        },
       });
 
       if (response.ok) {
