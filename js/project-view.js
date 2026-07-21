@@ -61,7 +61,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   const overviewText = p.overviewDetail ?? desc;
 
   const thumb = p.thumb ?? p.thumbnail ?? p.thumbnail_url ?? 'assets/images/hero.png';
-  const heroColorClass = title.includes('Arc & Beyond') ? 'is-blue' : '';
+  const isArcBeyond = title.includes('Arc & Beyond');
+  const isMarugoto = title === 'まるごと祭2024 企画ディレクション';
+  const heroColorClass = isArcBeyond ? 'is-blue' : '';
+  const projectVariantClass = [
+    isArcBeyond ? 'is-arc-beyond' : '',
+    isMarugoto ? 'is-marugoto' : ''
+  ].filter(Boolean).join(' ');
 
   const context = p.context ?? p.ontext ?? p.overview ?? '';
   const problem = p.problem ?? '';
@@ -93,7 +99,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   const links = p.links && typeof p.links === 'object'
     ? Object.entries(p.links).filter(([, url]) => url && url !== '#')
     : [];
-
   const renderList = (items) => {
     if (Array.isArray(items)) {
       return items.map(item => `<li>${item}</li>`).join('');
@@ -104,16 +109,43 @@ document.addEventListener('DOMContentLoaded', async () => {
     return '';
   };
 
+  const escapeHtml = (value) => String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+
+  const renderDetailTitle = (value) => {
+    const text = String(value ?? '');
+
+    if (text === 'Arc & Beyond コミュニケーション戦略') {
+      return `
+        <span class="detail-title-line detail-title-line--en">Arc &amp; Beyond</span>
+        <span class="detail-title-line detail-title-line--jp">コミュニケーション<wbr>戦略</span>
+      `;
+    }
+
+    if (text === 'まるごと祭2024 企画ディレクション') {
+      return `
+        <span class="detail-title-line detail-title-line--marugoto-main">まるごと祭2024</span>
+        <span class="detail-title-line detail-title-line--marugoto-sub">企画ディレクション</span>
+      `;
+    }
+
+    return escapeHtml(text);
+  };
+
   document.title = `${title || 'Project'} | Kaworu Suzuki Portfolio`;
 
   root.innerHTML = `
-    <article class="project-detail">
+    <article class="project-detail ${projectVariantClass}">
 
       <!-- ================= HERO ================= -->
       <section class="detail-hero-img ${heroColorClass}" style="background-image:url('${thumb}')">
         <div class="hero-overlay">
           <span class="detail-cat">${tagLine}</span>
-          <h1 class="detail-title">${title}</h1>
+          <h1 class="detail-title">${renderDetailTitle(title)}</h1>
           ${heroCopy ? `<p class="detail-lead">${heroCopy}</p>` : ''}
 
           <div class="hero-meta-row">

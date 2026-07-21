@@ -23,7 +23,9 @@ function renderProjects(filteredData) {
     const year = p.year || "";
 
     const categoryText = categories.join(" / ");
-    const kicker = categoryText || "PROJECT";
+    const kicker = title.includes("Arc & Beyond")
+      ? "Communication Strategy / PR / WEB&#10;DESIGN"
+      : (categoryText || "PROJECT");
     const mark = title.includes("Arc & Beyond") ? "A&B" : "PROJECT";
     const noThumbClass = thumb ? "" : "is-no-thumb";
 

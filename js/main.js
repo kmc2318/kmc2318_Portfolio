@@ -304,8 +304,13 @@ function renderTopProjects(container, data) {
     const categories = p.categories ?? (p.category ? [p.category] : []);
     const roles = p.roles ?? p.tags ?? [];
 
+    const categoryText = Array.isArray(categories) ? categories.join(" / ") : String(categories || "");
+    const fallbackKicker = title.includes("Arc & Beyond")
+      ? "Communication Strategy / PR / WEB&#10;DESIGN"
+      : (categoryText || "PROJECT");
     const tagLine = [year, ...categories].filter(Boolean).join(" / ");
     const metaLine = Array.isArray(roles) ? roles.join(" / ") : String(roles || "");
+    const mark = title.includes("Arc & Beyond") ? "A&B" : "PROJECT";
 
     // 画像パスも両対応
     const thumb = p.thumb ?? p.thumbnail ?? "assets/images/hero.png";
@@ -317,8 +322,8 @@ function renderTopProjects(container, data) {
       <article class="project-row">
         <a class="project-link" href="${detailUrl}" aria-label="${title}の詳細を見る"></a>
 
-        <div class="project-row__media">
-          <img src="${thumb}" alt="${alt}">
+        <div class="project-row__media" data-kicker="${fallbackKicker}" data-mark="${mark}">
+          <img src="${thumb}" alt="${alt}" onerror="this.closest('.project-row').classList.add('is-no-thumb'); this.remove();">
         </div>
 
         <div class="project-row__content">

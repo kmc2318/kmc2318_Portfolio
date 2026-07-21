@@ -3,6 +3,7 @@
 window.projects = [
 {
 id: "01",
+priority: 1,
 year: "2024",
 categories: ["Event", "Experience Design"],
 title: "まるごと祭2024 企画ディレクション",
@@ -43,6 +44,14 @@ output:
 overviewDetail:
   "神山まるごと高専の学生・スタッフが本気でつくる文化祭「まるごと祭2024」にて、実行委員として企画全体のディレクションを担当した。30を超える企画それぞれが、まるごと祭全体のコンセプトと合っているか、来場者の体験として成立しているかを軸に、企画者と定期的な1on1を行いながら設計・調整を進めた。企画単体の完成度だけでなく、「祭りとしての一体感」を重視し、各企画の価値を引き立てる仕掛けや、会場全体の体験の流れを考え続けた。",
 thumb: "assets/images/projects1.jpg",
+detailImages: {
+  summary: [
+    "assets/images/projects1.jpg",
+    "assets/images/process1.png",
+    "assets/images/process2.jpg",
+    "assets/images/process3.png"
+  ]
+},
 
 context:
   "1年目は学内向けだった祭りを、2年目は1,300人以上が来場する一般公開の文化祭へ広げることになった。30を超える企画と同時並行で向き合う中で、「なぜそこまでやる必要があるのか」「前の方がよかった」という反発もあった。意見の衝突や不満を完全に解消することは難しい。それでも、企画者との1on1を重ね、話を聞き、共感できる感情には共感しながら、「良いものをつくりたい」という一点で折り合いを探し続けた。終了後、「楽しかった」「やってよかった」と企画者が言ってくれたことが何より嬉しかった。来場者の反応以上に、仲間がそう言ってくれた瞬間が一番の報酬だった。",
@@ -80,7 +89,8 @@ links: { まるごと祭2024HP: "https://marugotosai.studio.site/", github: "#" 
 },
 {
 id: "02",
-year: "2025",
+priority: 2,
+year: "2024-2025",
 categories: ["Planning", "Exhibition Design"],
 title: "私の自慢の隣人展",
 description:
@@ -122,6 +132,14 @@ output:
 
 roles: ["Experience Design", "Direction", "Space/Journey Design", "Web Coding"],
 thumb: "assets/images/projects2.jpg",
+detailImages: {
+  summary: [
+    "assets/images/projects2.jpg",
+    "assets/images/rinijin1.JPG",
+    "assets/images/rinjin2.JPG",
+    "assets/images/rinjin3.JPG"
+  ]
+},
 
 context:
   "私たちは、周りに還元する優しさを持つ人を「自慢の隣人」と定義した。しかし、「隣人」という言葉は一般的ではなく、前提がないと伝わりづらい。展示は“見て終わり”になりやすく、日常に戻ると忘れられてしまう。だからこそ、来場者が迷わず理解し、自然に参加し、体験を持ち帰れるように、入口の解釈合わせから参加型アクションまでを一続きで設計した。",
@@ -159,7 +177,8 @@ tools: ["Figma", "Illustrator", "Photoshop", "Premiere Pro", "After Effects", "V
 },
 {
 id: "03",
-year: "2025",
+priority: 4,
+year: "2025-Now",
 categories: ["Media", "PR", "Design"],
 title: "さあ・くる神山ラボ",
 description:
@@ -200,7 +219,16 @@ output:
   "町の人とラボをつなぐ広報導線を、動画・SNS・Web・紙・イベントを組み合わせてつくった。",
 
 roles: ["Design", "PR Strategy", "Content Creation", "Video Production"],
-thumb: "assets/images/projects3.png",
+thumb: "assets/images/ぽっぽぽまち歩き.png",
+detailImages: {
+  summary: [
+    "assets/images/labo1.jpg",
+    "assets/images/labo2.jpg",
+    "assets/images/labo3.jpg",
+    "assets/images/projects3.png",
+    "assets/images/ぽっぽぽまち歩き.png"
+  ]
+},
 
 context:
   "神山町は人口が少なく、情報の伝達手段も世代によって大きく異なる。SNSやWebに慣れている人と、紙や対面での情報に安心感を持つ人では、広報の届き方が違っていた。ラボの課題は、単に情報を出すことではなく、“人の顔が見えること”“関われる場所だと感じられること”を同時に満たすことだった。地方ならではの広報として、デジタルとアナログを組み合わせた接点設計が必要だった。",
@@ -241,7 +269,8 @@ tools: ["Figma", "Studio", "Illustrator", "Filmora", "Notion", "Slack"]
 },
 {
 id: "04",
-year: "2025",
+priority: 3,
+year: "2025-Now",
 categories: ["Communication Strategy", "PR", "Web Design"],
 title: "Arc & Beyond コミュニケーション戦略",
 description:
@@ -284,6 +313,15 @@ output:
 
 roles: ["Communication Strategy", "PR", "Web Design"],
 thumb: "assets/images/arc-beyond-hero.png",
+detailImages: {
+  summary: [
+    "assets/images/Arc&Beyond_活動写真.png",
+    "assets/images/projects4.png",
+    "assets/images/AnB人格_理想的な位置関係.png",
+    "assets/images/Webサイト制作.png",
+    "assets/images/動画制作.png"
+  ]
+},
 
 context:
   "世界には多くの社会課題がある一方で、課題に取り組みたくても、採算が合わず継続できないケースがある。Arc & Beyondは、そのような課題を越えて挑戦したい人を支援する場であり、発信においても活動の価値や人格が伝わる設計が必要だった。",
@@ -291,19 +329,22 @@ problem: "法人の人格と活動価値を、初見の人にも伝わる形に�
 
 process: [
   {
-    step: "Define",
+    step: "人格定義",
     detail:
-      "広報を進める前に、情報を届けたい相手にどのように受け取ってほしいか、どんな法人だと思ってもらいたいかを定義した。法人格のように捉えることで、発信の仕方をイメージしやすくした。"
+      "広報を進める前に、情報を届けたい相手にどのように受け取ってほしいか、どんな法人だと思ってもらいたいかを定義した。法人格のように捉えることで、発信の仕方をイメージしやすくした。",
+    image: "assets/images/AnB人格_理想的な位置関係.png"
   },
   {
-    step: "Publish",
+    step: "Webサイト制作",
     detail:
-      "定義した法人像を軸に、各媒体での発信内容を考え、提案した。一つひとつ意図を込めて文章を作成し、SNS投稿や記事の見せ方を整えた。"
+      "元々あったWebサイトのデザイン更新案を提案。コーポレートサイトを見にくるターゲット層がほしい情報は何かを分析し、デザインに落とし込んだ。",
+    image: "assets/images/Webサイト制作.png"
   },
   {
-    step: "Design",
+    step: "動画制作",
     detail:
-      "元々あったWebサイトのデザイン更新案を提案。コーポレートサイトを見にくるターゲット層がほしい情報は何かを分析し、デザインに落とし込んだ。"
+      "Arc & Beyondの活動や価値が伝わるよう、リーチ動画の企画・構成・制作に関わり、WebやSNSで届く見せ方を整えた。",
+    image: "assets/images/動画制作.png"
   }
 ],
 
@@ -312,7 +353,9 @@ result:
 learnings:
   "広報は投稿を増やすことではなく、何をどの順番で誰に届けるかを設計することだと学んだ。法人像、文章、媒体、デザインがつながることで、発信は単なる告知ではなく関係づくりになる。",
 
-links: {},
+links: {
+  制作したWebサイト: "https://arc-beyond.org/"
+},
 tools: ["Figma", "Illustrator", "Photoshop", "Premiere Pro", "After Effects", "Lightroom", "Slack", "Notion"]
 
 }

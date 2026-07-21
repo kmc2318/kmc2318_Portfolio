@@ -75,6 +75,7 @@
 
     const merged = { ...localProject, ...remoteProject };
     const fallbackKeys = [
+      "priority",
       "year",
       "categories",
       "oneLine",
@@ -87,6 +88,7 @@
       "context",
       "problem",
       "thumb",
+      "detailImages",
     ];
 
     fallbackKeys.forEach((key) => {
