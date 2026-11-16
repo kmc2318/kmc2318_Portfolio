@@ -1,547 +1,206 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About | Kaworu Suzuki Portfolio</title>
-  <link rel="stylesheet" href="css/style.css?v=20260702-4">
-  <style>
-    :root { --header-h: 72px; }
-
-    .about-page {
-      padding-top: var(--header-h);
-    }
-
-    .about-hero {
-      width: 100vw;
-      margin-left: calc(50% - 50vw);
-      padding: 140px var(--container-pad) 80px;
-      background: var(--bg);
-      position: relative;
-      overflow: hidden;
-      min-height: calc(100vh - var(--header-h));
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .about-hero h1 {
-      font-family: var(--font-jp);
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      font-weight: 400;
-      margin-bottom: 40px;
-      line-height: 1.5;
-      text-align: left;
-    }
-
-    .about-hero p {
-      font-size: 1rem;
-      color: var(--text);
-      max-width: 700px;
-      margin: 0;
-      line-height: 1.8;
-      text-align: left;
-    }
-
-    /* Thread-like background */
-    .about-hero::before {
-      content: "";
-      position: absolute;
-      inset: -20% -10%;
-      background:
-        radial-gradient(1000px 300px at 15% 15%, rgba(0,0,0,0.05), transparent 65%),
-        radial-gradient(900px 260px at 80% 25%, rgba(0,0,0,0.04), transparent 65%),
-        repeating-linear-gradient(
-          120deg,
-          rgba(0,0,0,0.08) 0px,
-          rgba(0,0,0,0.08) 1px,
-          transparent 1px,
-          transparent 64px
-        ),
-        repeating-linear-gradient(
-          -120deg,
-          rgba(0,0,0,0.045) 0px,
-          rgba(0,0,0,0.045) 1px,
-          transparent 1px,
-          transparent 92px
-        );
-      opacity: 0.45;
-      pointer-events: none;
-      animation: threadFlow 18s linear infinite;
-    }
-
-    .about-hero > * {
-      position: relative;
-      z-index: 1;
-    }
-
-    @keyframes threadFlow {
-      0%   { transform: translate3d(0, 0, 0) rotate(0.3deg); }
-      50%  { transform: translate3d(-2.5%, -1.5%, 0) rotate(-0.3deg); }
-      100% { transform: translate3d(0, 0, 0) rotate(0.3deg); }
-    }
-
-    .about-section {
-      padding: var(--container-pad);
-      max-width: var(--container-max);
-      margin: 0 auto;
-    }
-
-    .about-intro {
-      font-size: 1rem;
-      color: var(--sub);
-      margin-bottom: 80px;
-      line-height: 1.8;
-    }
-
-    .section-label {
-      font-family: var(--font-en);
-      font-size: 2rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--sub);
-      margin-bottom: 60px;
-      text-align: center;
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      margin-bottom: 100px;
-      align-items: center;
-    }
-
-    .about-grid-img {
-      width: 100%;
-      aspect-ratio: 1;
-      border-radius: 12px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .about-grid-img img {
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: cover;
-      position: absolute;
-      inset: 0;
-      transition: opacity 0.4s ease;
-      opacity: 0;
-    }
-
-    .about-grid-img img:first-child {
-      opacity: 1;
-    }
-
-    .about-grid-img:hover img {
-      opacity: 0;
-    }
-
-    .about-grid-img:hover img:nth-child(2) {
-      opacity: 1;
-    }
-
-    .about-grid-text h2 {
-      font-family: var(--font-jp);
-      font-size: 1.8rem;
-      font-weight: 400;
-      margin-bottom: 20px;
-    }
-
-    .about-grid-text p {
-      font-size: 0.95rem;
-      color: var(--sub);
-      line-height: 1.8;
-      margin-bottom: 20px;
-    }
-
-    .values-list {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 30px;
-      margin-top: 80px;
-    }
-
-    .value-card {
-      background: var(--glass-bg);
-      backdrop-filter: var(--glass-blur);
-      -webkit-backdrop-filter: var(--glass-blur);
-      border: 1px solid var(--glass-border);
-      border-radius: 16px;
-      padding: 40px 30px;
-      text-align: center;
-      transition: all 0.5s var(--ease);
-      cursor: pointer;
-      overflow: hidden;
-      height: fit-content;
-    }
-
-    .value-card:hover {
-      border-color: var(--text);
-      transform: translateY(-4px);
-    }
-
-    .value-card.is-active {
-      text-align: left;
-      border-color: var(--text);
-      background: white;
-      cursor: default;
-    }
-
-    .value-detail {
-      display: none;
-      margin-top: 25px;
-      padding-top: 25px;
-      border-top: 1px solid var(--border);
-      animation: fadeIn 0.5s ease forwards;
-    }
-
-    .value-card.is-active .value-detail {
-      display: block;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .value-number {
-      font-family: var(--font-en);
-      font-size: 2.5rem;
-      font-weight: 300;
-      letter-spacing: 0.1em;
-      color: var(--sub);
-      margin-bottom: 15px;
-    }
-
-    .value-card h3 {
-      font-family: var(--font-jp);
-      font-size: 1.4rem;
-      font-weight: 400;
-      margin-bottom: 15px;
-      color: var(--text);
-    }
-
-    .value-card p {
-      font-size: 0.9rem;
-      color: var(--sub);
-      line-height: 1.7;
-      cursor: pointer;
-    }
-
-    @media (max-width: 968px) {
-      .about-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-
-      .values-list {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .tools-section {
-      margin-top: 100px;
-      text-align: left;
-    }
-
-    .tools-section h3 {
-      font-family: var(--font-jp);
-      font-size: 1.4rem;
-      font-weight: 400;
-      margin-bottom: 20px;
-    }
-
-    .tools-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
-      gap: 40px;
-      align-items: start;
-    }
-
-    .tools-list {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px 22px;
-    }
-
-    .tool-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-family: var(--font-en);
-      letter-spacing: 0.04em;
-      color: var(--text);
-    }
-
-    .tool-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      border: 1px solid var(--glass-border);
-      background: var(--glass-bg);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.8rem;
-      color: var(--sub);
-      flex: 0 0 36px;
-    }
-
-    .tools-lead {
-      margin-top: 45px;
-      color: var(--sub);
-      line-height: 1.8;
-      font-size: 0.95rem;
-    }
-
-    @media (max-width: 968px) {
-      .tools-grid {
-        grid-template-columns: 1fr;
-        gap: 24px;
-      }
-    }
-
-    .contact-section {
-      margin: 80px 0 120px;
-    }
-
-    .contact-title {
-      font-family: var(--font-jp);
-      font-size: 1.8rem;
-      font-weight: 400;
-      margin-bottom: 20px;
-    }
-
-    .contact-lead {
-      color: var(--sub);
-      line-height: 1.8;
-      font-size: 0.95rem;
-      margin-bottom: 30px;
-    }
-
-    .contact-email {
-      font-family: var(--font-en);
-      font-size: 1.1rem;
-      border-bottom: 1px solid var(--text);
-      display: inline-block;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>私について｜鈴木カヲル ポートフォリオ</title>
+<meta name="description" content="鈴木カヲルのプロフィールと、ものづくり・関係性のデザインについて。">
+<link rel="canonical" href="https://kmc2318.github.io/kmc2318_Portfolio/about.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="私について｜鈴木カヲル ポートフォリオ">
+<meta property="og:description" content="鈴木カヲルのプロフィールと、ものづくり・関係性のデザインについて。">
+<meta property="og:url" content="https://kmc2318.github.io/kmc2318_Portfolio/about.html">
+<meta property="og:image" content="https://kmc2318.github.io/kmc2318_Portfolio/assets/img/hero/blue-editorial-og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400..500&amp;family=Noto+Sans+JP:wght@400..700&amp;family=Shippori+Mincho:wght@400;500&amp;display=swap" media="print" onload="this.media=&#x27;all&#x27;">
+<noscript>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400..500&amp;family=Noto+Sans+JP:wght@400..700&amp;family=Shippori+Mincho:wght@400;500&amp;display=swap">
+</noscript>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/pages.css">
+<script defer src="js/site.js">
+</script>
+<noscript>
+<style>.editorial-detail .menu-toggle{display:none}@media(max-width:767px){.editorial-detail .site-header{height:auto;position:static}.editorial-detail .site-header .wrap{flex-wrap:wrap;padding-block:16px}.editorial-detail .site-nav{display:flex;gap:16px;flex-wrap:wrap}}</style>
+</noscript>
 </head>
-
-<body class="about-page">
-
-  <!-- 共通ヘッダー -->
-  <header id="main-header" class="header-scrolled">
-    <div class="logo">
-      <a href="index.html">Kaworu Suzuki Portfolio</a>
-    </div>
-    <nav id="main-nav">
-      <a href="index.html" id="nav-home">Home</a>
-      <a href="index.html#projects" id="nav-project">Project</a>
-      <a href="index.html#about-values" id="nav-about" class="current">About</a>
-      <a href="index.html#contact" id="nav-contact">Contact</a>
-      <span class="nav-indicator" aria-hidden="true"></span>
-    </nav>
-  </header>
-
-  <!-- ブレッドクラムナビゲーション -->
-  <div class="page-subnav">
-    <span class="breadcrumb">
-      <a href="index.html#Projects">トップ</a>
-      <span class="sep">›</span>
-      <span class="current">About</span>
-    </span>
-  </div>
-
-  <!-- ヒーロー部分 -->
-  <section class="about-hero">
-    <h1>
-      関係性を<br>
-      紐解き、結ぶ。
-    </h1>
-    <p>
-      モノをつくる。体験をつくる。それはただ表面的な形を整えることではなく、<br>
-      人と人、人と場の「関係性」をデザインすることだと、私は考えています。<br>
-      現場に行き、話を聴き、想いを受け取る。そんなプロセスをしっかりと踏むことで、本当の関係性が見えてくる。<br>
-      それからやっと、新たな関係性をデザインすることに重きを置いてきました。
-    </p>
-  </section>
-
-  <!-- コンテンツ -->
-  <section class="about-section">
-
-    <!-- プロフィール -->
-    <!-- プロフィール -->
-<div class="profile-section">
-  <p class="section-label">Profile</p>
-
-  <div class="profile-card">
-    <div class="profile-meta">
-      <div class="profile-meta-item">
-        <span>名前</span>
-        <p>鈴木カヲル</p>
-      </div>
-
-      <div class="profile-meta-item">
-        <span>出身</span>
-        <p>山形県酒田市</p>
-      </div>
-    </div>
-
-    <div class="profile-body">
-      <p>
+<body id="top" class="editorial-detail about-detail">
+<a class="skip-link" href="#main">本文へスキップ</a>
+<header class="site-header">
+<div class="wrap">
+<a class="logo brand" href="index.html">
+<b>鈴木カヲル</b>
+<span class="label">Kaworu Suzuki — Portfolio</span>
+</a>
+<nav class="nav site-nav" aria-label="メインナビゲーション">
+<a href="index.html" data-nav="top">Top</a>
+<a class="" href="index.html#works">Works</a>
+<a href="index.html#approach" class="">Approach</a>
+<a href="index.html#about" class="">About</a>
+<a class="btn btn--secondary btn--sm" href="index.html#contact">Contact</a>
+<span class="nav-indicator" aria-hidden="true">
+</span>
+</nav>
+<button class="menu-btn menu-toggle" aria-label="メニューを開く" type="button" aria-expanded="false" aria-controls="mobile-menu">
+<i>
+</i>
+</button>
+</div>
+</header>
+<div class="mobile-menu dark" id="mobile-menu" role="dialog" aria-modal="true" aria-label="ナビゲーション" hidden>
+<button class="mobile-close" type="button" aria-label="メニューを閉じる">×</button>
+<nav>
+<a href="index.html">Top</a>
+<a href="index.html#works">Works</a>
+<a href="index.html#approach">Approach</a>
+<a href="index.html#about">About</a>
+<a href="index.html#contact">Contact</a>
+</nav>
+<a class="email" href="mailto:kmc2318@kamiyama.ac.jp">kmc2318@kamiyama.ac.jp</a>
+</div>
+<main id="main">
+<div class="container">
+<nav class="breadcrumb" aria-label="パンくず">
+<a class="text-link" href="index.html">トップ <span aria-hidden="true">⟶</span>
+</a>
+<span>/ About</span>
+</nav>
+<section class="about-intro">
+<p class="eyebrow">About</p>
+<h1>鈴木カヲル</h1>
+<p class="about-poem">
+        モノの見えかたが変わる。<br>
+        ヒトの見えかたが変わる。<br>
+        少し、日々が楽しくなる。<br>
+<br>
+        モノとモノ、モノとヒト。<br>
+        ヒトとヒト、今日と明日。<br>
+<br>
+        少しの関係性が変わる。<br>
+        その瞬間を、私はつくりたいのです。
+</p>
+</section>
+<section class="about-biography">
+<div>
+<figure class="detail-photo ">
+<button class="photo-button" data-lightbox type="button" aria-label="鈴木カヲルのプロフィール写真を拡大">
+<picture>
+<source type="image/webp" srcset="assets/img/profile/profile-approved-800.webp 800w, assets/img/profile/profile-approved-1600.webp 1000w" sizes="(max-width:767px) 100vw, 1160px">
+<img src="assets/img/profile/profile-approved-1600.jpg" srcset="assets/img/profile/profile-approved-800.jpg 800w, assets/img/profile/profile-approved-1600.jpg 1000w" sizes="(max-width:767px) 100vw, 1160px" data-full="assets/img/profile/profile-approved-1600.webp" width="1000" height="666" alt="鈴木カヲルのプロフィール写真" decoding="async" fetchpriority="high">
+</picture>
+</button>
+</figure>
+</div>
+<div>
+<h2>Profile</h2>
+<p>神山まるごと高専 4年（一期生）・ソニー奨学生<br>出身：山形県酒田市</p>
+<p>
         2007年山形県酒田市生まれ。<br>
         犬が大好きで、毎日のようにダンボールで愛犬の家を工作し没頭。
       </p>
-
-      <p>
+<p>
         中学校では生徒会長を務め、モノや体験で関係性をつくれることに気づき、
         モノづくり/体験設計に興味を持ち始める。
       </p>
-
-      <p>
+<p>
         2023年4月に神山まるごと高専へ入学し、
         現在も徳島県神山町で寮生活を送っている。
       </p>
-
-      <p>
+<p>
         イベント企画から始まり、広報、展示体制の構築、プロジェクトマネージャーなど、
         多角的なアプローチで関係性のデザインに取り組んできました。
       </p>
-    </div>
-  </div>
 </div>
-    
-    <!-- 01. 紹介セクション -->
-    <div class="about-grid">
-      <div class="about-grid-img">
-        <img src="assets/images/about-1.jpg" alt="About Photo 1">
-        <img src="assets/images/about2.jpeg" alt="About Photo 2">
-        <img src="assets/images/about3.jpeg" alt="About Photo 3">
-        <img src="assets/images/about4.jpeg" alt="About Photo 4">
-        <img src="assets/images/about5.jpeg" alt="About Photo 5">
-
-      </div>
-      <div class="about-grid-text">
-        <h2>モノをつくること、<br>関係性をデザインすること。</h2>
-        <p>
+</section>
+<div class="about-content">
+<section>
+<h2>モノをつくること、<br>関係性をデザインすること。</h2>
+<p>
           私は今まで、目の前に届ける相手がいるモノづくりに没頭してきました。
         </p>
-        <p>
+<p>
           「あのこが楽しそうに笑ってくれたらいいな」<br>
           「これをつくったら家族が喜びそうだな」<br>
-        </p>
-        <p>
+</p>
+<p>
           相手を思い浮かべながらつくる時間が、私にとっての原動力でした。<br>
           モノは形だけでなく、人と人をつなぎ、<br>
-          その先の関係性までもつくるきっかけになるものだと思っています。<br><br>
+          その先の関係性までもつくるきっかけになるものだと思っています。<br>
+<br>
           だから私は、<br>
           使う人の気持ちに寄り添うモノをつくること。<br>
           誰かの背中を押せるきっかけになるようなデザインをすることを大切にしています。
         </p>
-      </div>
-    </div>
-
-    <!-- 02. 大切にしていることセクション -->
-    <p class="section-label">Values</p>
-
-    <div class="values-list">
-      <div class="value-card" data-value="empathy">
-        <div class="value-number">01</div>
-        <h3>共感</h3>
-        <p>相手の立場に立って考え、想いを受け取ることからすべてが始まる。デザインはまず、人を知ることからだと考えています。</p>
-      </div>
-      <div class="value-card" data-value="action">
-        <div class="value-number">02</div>
-        <h3>実行</h3>
-        <p>考えるだけで終わらせず、手を動かして形にする。小さくても、現実を一歩動かすことを大切にしています。</p>
-      </div>
-      <div class="value-card" data-value="connect">
-        <div class="value-number">03</div>
-        <h3>結ぶ</h3>
-        <p>人と人、想いと想いをつなぎ、新しい関係性を生み出す。その"間"をデザインすることが私のやりたいことです。</p>
-      </div>
-    </div>
-
-    <div class="tools-section">
-      <p class="section-label">Tools</p>
-      <div class="tools-grid">
-        <div class="tools-list">
-          <div class="tool-item"><span class="tool-icon">Fi</span>Figma</div>
-          <div class="tool-item"><span class="tool-icon">Ai</span>Illustrator</div>
-          <div class="tool-item"><span class="tool-icon">Ps</span>Photoshop</div>
-          <div class="tool-item"><span class="tool-icon">Ae</span>After Effects</div>
-          <div class="tool-item"><span class="tool-icon">Pr</span>Premiere Pro</div>
-          <div class="tool-item"><span class="tool-icon">VS</span>VSCode</div>
-          <div class="tool-item"><span class="tool-icon">No</span>Notion</div>
-          <div class="tool-item"><span class="tool-icon">Sl</span>Slack</div>
-        </div>
-        <p class="tools-lead">
-          日常的に使用しているツールです。プロフェッショナルの方々ほど使いこなせているわけではありませんが、
-          制作や課題の中で基本的な機能は一通り扱い、アイデアを形にするためや仲間と一緒に進めていくためのツールとして活用しています。
-        </p>
-      </div>
-    </div>
-
-  </section>
-
-  <script src="js/data.js?v=20260721-1"></script>
-  <script src="js/main.js"></script>
-
-  <script>
-    // 画像スライドショー
-    document.addEventListener('DOMContentLoaded', () => {
-      const imageContainer = document.querySelector('.about-grid-img');
-      if (imageContainer) {
-        const images = imageContainer.querySelectorAll('img');
-        let currentIndex = 0;
-
-        imageContainer.addEventListener('mouseenter', () => {
-          images[currentIndex].style.opacity = '0';
-          currentIndex = (currentIndex + 1) % images.length;
-          images[currentIndex].style.opacity = '1';
-        });
-      }
-
-      // VALUES: クリックで開閉
-      const valueCards = document.querySelectorAll('.value-card');
-
-      const valueData = {
-        empathy: `
-          <div class="value-detail">
-            <p>これまで私は、マネジメントやディレクション、連携の役割を担うことがほとんどでした。異なる立場とバックグラウンドを持つ者同士で100%理解し合うことは難しいですが、想像力を持ち、偏見を持たずに話をよく聴く。そして相手の気持ちや感情に共感すること。それが、私にできることだと考えています。</p>
-            <p style="margin-top: 20px;">
-          </div>`,
-        action: `
-          <div class="value-detail">
-            <p>考えることは誰でもできるけれど、形にすることはそれより難しい。これまで企画から展示制作までも携わらせてもらってきましたが、自分の考えやつくりたいモノがあるときにまずはつくってみること、やってみることの重要性を学びました。それからは、必要な準備はした上で、試してみることを大切にしています。</p>
-          </div>`,
-        connect: `
-          <div class="value-detail">
-            <p>町内で「伝える」ための仕事をする中で、同じ内容でも、伝え方ひとつで相手の受け取り方や行動が変わり、人と人との関係性まで左右することに気づきました。人と人のあいだにある距離や不安をやわらかくほどき、新しい関係性を結んでいくこともできる。また、何かをつなげるだけでなく、自分自身のチャンスや機会も自己の成長に結びつけていくことを大切にしています。</p>
-          </div>`
-      };
-
-      valueCards.forEach(card => {
-        card.addEventListener('click', () => {
-          const isAlreadyActive = card.classList.contains('is-active');
-
-          if (!isAlreadyActive) {
-            card.classList.add('is-active');
-            const key = card.dataset.value;
-            card.insertAdjacentHTML('beforeend', valueData[key]);
-          } else {
-            card.classList.remove('is-active');
-            const detail = card.querySelector('.value-detail');
-            if (detail) detail.remove();
-          }
-        });
-      });
-    });
-  </script>
-
+</section>
+<section>
+<h2>カヲルの「ヲ」</h2>
+<p>カヲルの「ヲ」に両親が込めてくれた想いを、私はすごく気に入っています。私の地元・山形では、“くっつきの「を」”と表現します。言葉と言葉をつなげる「を」のように、人と人をつなげる人になってほしい。この名前をきっかけに、関係性について考えるようになりました。</p>
+</section>
+<section>
+<h2>Tools</h2>
+<ul class="tools-list">
+<li>Figma → <a href="works/arc-beyond-web.html">Arc &amp; Beyond Webサイトの画面デザイン</a>
+</li>
+<li>Illustrator → <a href="works/neighbors-exhibition.html#expression">隣人展の展示グラフィック</a>
+</li>
+<li>Photoshop → <a href="works/neighbors-exhibition.html#expression">隣人展の展示グラフィック</a>
+</li>
+<li>Premiere Pro → <a href="works/neighbors-exhibition.html#expression">隣人展の展示映像</a>
+</li>
+<li>After Effects → <a href="works/neighbors-exhibition.html#expression">隣人展の展示映像</a>
+</li>
+<li>VSCode → <a href="works/neighbors-exhibition.html#expression">カメラに反応するインタラクティブ作品</a>
+</li>
+<li>Google Apps Script → <a href="works/soujirou.html#system">清掃の自動割り当て</a>
+</li>
+<li>Slack → <a href="works/soujirou.html#system">清掃の当日朝の自動通知</a>
+</li>
+<li>Notion → <a href="works/marugoto-fes-2024.html#process">まるごと祭の物品リスト</a>・<a href="works/dorm.html#organization">寮の活動記録</a>
+</li>
+</ul>
+<p class="caption">それぞれ、実際に使った作品のページへリンクしています。</p>
+</section>
+<section>
+<a class="text-link" href="index.html#approach">仕事の進め方を見る <span aria-hidden="true">⟶</span>
+</a>
+</section>
+<section>
+<h2>Contact</h2>
+<a class="text-link" href="index.html#contact">お問い合わせ <span aria-hidden="true">⟶</span>
+</a>
+<p class="sns-links">
+<a class="text-link" href="https://www.linkedin.com/in/%E3%82%AB%E3%83%B2%E3%83%AB-%E9%88%B4%E6%9C%A8-8a8402399" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn（別タブで開く）">LinkedIn <span aria-hidden="true">↗</span>
+</a>
+<a class="text-link" href="https://www.facebook.com/share/1Kamz28oHz/" target="_blank" rel="noopener noreferrer" aria-label="Facebook（別タブで開く）">Facebook <span aria-hidden="true">↗</span>
+</a>
+</p>
+</section>
+</div>
+</div>
+</main>
+<footer class="site-footer dark">
+<div class="container">
+<span>© 2026 Kaworu Suzuki</span>
+<a class="text-link" href="#top">ページの先頭へ <span aria-hidden="true">⟶</span>
+</a>
+</div>
+</footer>
+<dialog class="lightbox" aria-label="画像を拡大表示">
+<button class="lightbox-close" type="button" aria-label="閉じる">×</button>
+<img src="assets/img/hero/hero-approved-800.webp" alt="" width="800" height="533" loading="lazy">
+<div class="lightbox-controls">
+<button type="button" data-lightbox-prev aria-label="前の画像">←</button>
+<p class="caption" aria-live="polite">
+</p>
+<button type="button" data-lightbox-next aria-label="次の画像">→</button>
+</div>
+</dialog>
 </body>
 </html>

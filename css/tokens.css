@@ -1,0 +1,10 @@
+:root {
+ --c-navy:#192853;--c-blue:#4A69B3;--c-soft:#8DB6C7;--c-cream:#F7F0E5;--c-alice:#EFF8FF;--c-yellow:#FFE14E;--c-tangelo:#D54C15;--c-white:#FFFFFF;
+ --c-navy-72:rgba(25,40,83,.72);--c-navy-20:rgba(25,40,83,.20);--c-navy-10:rgba(25,40,83,.10);--c-cream-72:rgba(247,240,229,.72);--c-cream-30:rgba(247,240,229,.30);
+ --f-display:'Shippori Mincho','Hiragino Mincho ProN','Yu Mincho',serif;--f-body:'Noto Sans JP','Hiragino Sans','Yu Gothic',sans-serif;--f-en:'DM Sans','Noto Sans JP',sans-serif;
+ --t-display-xl:clamp(36px,2.95vw + 24.5px,68px);--t-display-en:clamp(48px,3.81vw + 33.1px,88px);--t-heading-l:clamp(30px,1.33vw + 24.8px,44px);--t-heading-m:clamp(25px,.86vw + 21.7px,34px);--t-heading-s:clamp(18px,.19vw + 17.3px,20px);--t-lead:clamp(16px,.19vw + 15.3px,18px);--t-body:clamp(16px,.1vw + 15.6px,17px);--t-body-s:clamp(14px,.1vw + 13.6px,15px);--t-caption:clamp(12px,.1vw + 11.6px,13px);--t-label:clamp(11px,.1vw + 10.6px,12px);--t-number-xl:clamp(56px,3.05vw + 44.1px,88px);--t-number-m:clamp(32px,.76vw + 29px,40px);
+ --s-1:4px;--s-2:8px;--s-3:12px;--s-4:16px;--s-5:24px;--s-6:32px;--s-7:40px;--s-8:48px;--s-9:64px;--s-10:80px;--s-11:96px;--s-12:128px;
+ --container:1160px;--gutter:24px;--pad-x:56px;--measure:720px;--section-y:128px;--header-h:72px;--r-panel:8px;--r-input:4px;--r-pill:999px;--ease:cubic-bezier(.2,.7,.2,1);--d-fast:200ms;--d-base:600ms;
+}
+@media(max-width:1023px){:root{--pad-x:40px;--gutter:20px;--section-y:104px}}
+@media(max-width:767px){:root{--pad-x:20px;--gutter:16px;--section-y:72px;--header-h:60px}}

@@ -1,0 +1,1 @@
+(() => { const id = new URLSearchParams(location.search).get('id'); const routes = {'01':'works/marugoto-fes-2024.html','02':'works/neighbors-exhibition.html','03':'works/saakuru.html','04':'works/arc-beyond-web.html'}; location.replace(Object.prototype.hasOwnProperty.call(routes, id) ? routes[id] : 'index.html#works'); })();
