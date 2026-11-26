@@ -85,7 +85,7 @@
     imageIndex = (index + imageGroup.length) % imageGroup.length;
     const source = $('img', imageGroup[imageIndex]), dest = $('img', dialog);
     dest.src = source.dataset.full || source.currentSrc || source.src; dest.alt = source.alt; dest.width = source.width; dest.height = source.height;
-    $('.caption', dialog).textContent = `${imageIndex + 1} / ${imageGroup.length} — ${source.alt}`;
+    $('.caption', dialog).textContent = imageGroup[imageIndex].hasAttribute('data-lightbox-nocaption') ? '' : `${imageIndex + 1} / ${imageGroup.length} — ${source.alt}`;
     $$('[data-lightbox-prev], [data-lightbox-next]', dialog).forEach(b => b.hidden = imageGroup.length < 2);
   }
   document.addEventListener('click', e => {
